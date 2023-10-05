@@ -43,7 +43,7 @@ public class RecruiterController {
 
     }
 
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Recruiter> updateRecruiter(@PathVariable String id, @RequestBody Recruiter recruiter){
         recruiter = recruiterService.updateRecruiter(id, recruiter);
 

@@ -8,4 +8,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Profile {
+
+    private String id;
+
+    private String profile_detail_id;
+
+    private String document;
+
+    private String status;
+
+    private String uploaded_on;
 }
