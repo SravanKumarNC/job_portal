@@ -8,4 +8,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class InterviewSchedule {
+
+    private String id;
+
+    private String shortlist_id;
+
+    private String schedule_datetime;
+
+    private String interview_level;
+
+    private String status;
+
+    private String interviewer_details;
 }
