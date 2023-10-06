@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/profile")
+@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/api/v1/profiles")
 @AllArgsConstructor
 public class ProfileController {
 

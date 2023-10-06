@@ -1,5 +1,6 @@
 package com.jobrecruitement.recruiter.controller;
 
+import com.jobrecruitement.recruiter.entity.ProfileDetailsEntity;
 import com.jobrecruitement.recruiter.model.ProfileDetails;
 import com.jobrecruitement.recruiter.service.ProfileDetailsService;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1/profileDetails")
 @AllArgsConstructor
 public class ProfileDetailsController {
@@ -36,17 +38,17 @@ public class ProfileDetailsController {
             boolean deleted = false;
 
             deleted = profileDetailsService.deleteProfileDetails(id);
-            Map<String, Boolean> response = HashMap<>();
+            Map<String, Boolean> response =new HashMap<>();
             response.put("deleted", deleted);
 
-            return ProfileDetails.ok(response);
+            return ResponseEntity.ok(response);
         }
 
         @PutMapping("/{id}")
         public ResponseEntity<ProfileDetails> updateProfileDetails(@PathVariable String id, @RequestBody ProfileDetails profileDetails){
             profileDetails = profileDetailsService.updateProfileDetails(id, profileDetails);
 
-            return ProfileDetails.ok(profileDetails);
+            return ResponseEntity.ok(profileDetails);
         }
 
         @GetMapping

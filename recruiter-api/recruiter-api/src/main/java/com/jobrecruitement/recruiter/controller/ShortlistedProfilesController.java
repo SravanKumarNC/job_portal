@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1/shortlistedProfiles")
 @AllArgsConstructor
 public class ShortlistedProfilesController {
@@ -45,7 +47,7 @@ public class ShortlistedProfilesController {
 
         @PutMapping("/{id}")
         public ResponseEntity<ShortlistedProfiles> updateShortlistedProfiles(@PathVariable String id, @RequestBody ShortlistedProfiles shortlistedProfiles){
-            shortlistedProfiles = shortlistedProfiles.updateShortlistedProfiles(id, shortlistedProfiles);
+            shortlistedProfiles = shortlistedProfilesService.updateShortlistedProfiles(id, shortlistedProfiles);
 
             return ResponseEntity.ok(shortlistedProfiles);
         }
