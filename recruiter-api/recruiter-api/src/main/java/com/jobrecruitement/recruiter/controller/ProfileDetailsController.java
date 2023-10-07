@@ -21,7 +21,7 @@ public class ProfileDetailsController {
     @Autowired
         private ProfileDetailsService profileDetailsService;
 
-        @PostMapping("/{id}")
+        @PostMapping
         public ProfileDetails createProfileDetails(@RequestBody ProfileDetails profileDetails){
             return profileDetailsService.createProfileDetails(profileDetails);
         }

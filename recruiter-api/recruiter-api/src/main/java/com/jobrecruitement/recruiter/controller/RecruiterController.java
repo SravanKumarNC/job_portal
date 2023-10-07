@@ -2,9 +2,11 @@ package com.jobrecruitement.recruiter.controller;
 
 import com.jobrecruitement.recruiter.model.Recruiter;
 import com.jobrecruitement.recruiter.service.RecruiterService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -15,13 +17,15 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/v1/recruiters")
 @AllArgsConstructor
+@Validated
 public class RecruiterController {
+
 
     @Autowired
     private RecruiterService recruiterService;
 
     @PostMapping
-    public Recruiter createRecruiter(@RequestBody Recruiter recruiter){
+    public Recruiter createRecruiter(@Valid @RequestBody Recruiter recruiter){
         return recruiterService.createRecruiter(recruiter);
     }
 

@@ -29,17 +29,13 @@ public class ProfileDetailsServiceImpl implements ProfileDetailsService{
 
     @Override
     public ProfileDetails getProfileDetailsById(String id) {
-        return null;
-    }
-
-    @Override
-    public ProfileDetails getProfilesDetailsById(String id) {
         ProfileDetailsEntity profileDetailsEntity = profileDetailsRepository.findById(id).get();
         ProfileDetails profileDetails = new ProfileDetails();
         BeanUtils.copyProperties(profileDetailsEntity, profileDetails);
         return profileDetails;
-
     }
+
+
 
     @Override
     public boolean deleteProfileDetails(String id){

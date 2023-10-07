@@ -10,8 +10,6 @@ public interface ProfileDetailsService {
 
     public ProfileDetails getProfileDetailsById(String id);
 
-    public  ProfileDetails getProfilesDetailsById(String id);
-
     public boolean deleteProfileDetails(String id);
 
     public ProfileDetails updateProfileDetails(String id, ProfileDetails profileDetails);
