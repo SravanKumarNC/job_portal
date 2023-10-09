@@ -1,15 +1,20 @@
 package com.jobrecruitement.recruiter.controller;
 
 import com.jobrecruitement.recruiter.model.InterviewSchedule;
+import com.jobrecruitement.recruiter.model.Recruiter;
 import com.jobrecruitement.recruiter.service.InterviewScheduleService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -20,10 +25,28 @@ public class InterviewScheduleController {
     @Autowired
         private InterviewScheduleService interviewScheduleService;
 
-        @PostMapping
-        public InterviewSchedule createInterviewSchedule(@RequestBody InterviewSchedule interviewSchedule){
-            return interviewScheduleService.createInterviewSchedule(interviewSchedule);
 
+    //Without validation
+
+//        @PostMapping
+//        public InterviewSchedule createInterviewSchedule(@RequestBody InterviewSchedule interviewSchedule){
+//            return interviewScheduleService.createInterviewSchedule(interviewSchedule);
+//
+//        }
+
+    //With validation
+
+        @PostMapping
+        public ResponseEntity<?> createInterviewSchedule(@Valid @RequestBody InterviewSchedule interviewSchedule, BindingResult result) {
+            if (result.hasErrors()) {
+                List<String> errors = result.getAllErrors()
+                        .stream()
+                        .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                        .collect(Collectors.toList());
+                return ResponseEntity.badRequest().body(errors);
+            }
+            InterviewSchedule createdInterviewSchedule = interviewScheduleService.createInterviewSchedule(interviewSchedule);
+            return ResponseEntity.ok(createdInterviewSchedule);
         }
 
         @GetMapping("/{id}")
@@ -45,10 +68,28 @@ public class InterviewScheduleController {
             return ResponseEntity.ok(response);
         }
 
-        @PutMapping("/{id}")
-        public ResponseEntity<InterviewSchedule> updateInterviewSchedule(@PathVariable String id, @RequestBody InterviewSchedule interviewSchedule){
-            interviewSchedule = interviewScheduleService.updateInterviewSchedule(id, interviewSchedule);
+        // Without validation
 
+//        @PutMapping("/{id}")
+//        public ResponseEntity<InterviewSchedule> updateInterviewSchedule(@PathVariable String id, @RequestBody InterviewSchedule interviewSchedule){
+//            interviewSchedule = interviewScheduleService.updateInterviewSchedule(id, interviewSchedule);
+//
+//            return ResponseEntity.ok(interviewSchedule);
+//        }
+
+
+    //With validation
+
+        @PutMapping("/{id}")
+        public ResponseEntity<?> updateInterviewSchedule(@PathVariable String id, @Valid @RequestBody InterviewSchedule interviewSchedule, BindingResult result) {
+            if (result.hasErrors()) {
+                List<String> errors = result.getAllErrors()
+                        .stream()
+                        .map(DefaultMessageSourceResolvable::getDefaultMessage)
+                        .collect(Collectors.toList());
+                return ResponseEntity.badRequest().body(errors);
+            }
+            interviewSchedule = interviewScheduleService.updateInterviewSchedule(id, interviewSchedule);
             return ResponseEntity.ok(interviewSchedule);
         }
 
